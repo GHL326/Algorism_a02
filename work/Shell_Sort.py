@@ -6,3 +6,12 @@ def insert_with_gap(array, end, gap):
         array[i + gap] = array[i]
         i -= gap
     array[i + gap] = value
+
+
+def Shell_Sort(array):
+    gap = len(array) // 2
+    # 간격을 반씩 줄이고 마지막에는 gap=1로 전체를 정렬합니다.
+    while gap > 0:
+        for end in range(gap, len(array)):
+            insert_with_gap(array, end, gap)
+        gap //= 2
