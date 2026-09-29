@@ -1,3 +1,10 @@
+import json
+from pathlib import Path
+
+
+DATA_FILE = Path(__file__).parent / "data" / "count_sort.json"
+
+
 def count_frequencies(array):
     """0 이상의 정수마다 등장 횟수를 셉니다."""
     if any(type(value) is not int or value < 0 for value in array):
@@ -28,3 +35,16 @@ def Count_Sort(array):
     counts = count_frequencies(array)
     prefix_ends(counts)
     array[:] = place_stably(array, counts)
+
+
+def main():
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8-sig"))
+    dataset = data["datasets"][0]
+    array = dataset["values"][:]
+    print("Original array is:", array)
+    Count_Sort(array)
+    print("Sorted array is:", array)
+
+
+if __name__ == "__main__":
+    main()
