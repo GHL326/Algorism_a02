@@ -22,3 +22,14 @@ def sort_digit(array, divisor):
         counts[digit] -= 1
         result[counts[digit]] = array[i]
     array[:] = result
+
+
+def Radix_Sort_LSD(array):
+    if any(type(value) is not int or value < 0 for value in array):
+        raise ValueError("LSD 기수 정렬은 0 이상의 정수만 지원합니다.")
+    maximum = max(array, default=0)
+    divisor = 1
+    # 일의 자리에서 가장 높은 자리까지 순서대로 처리합니다.
+    while maximum // divisor > 0:
+        sort_digit(array, divisor)
+        divisor *= 10
