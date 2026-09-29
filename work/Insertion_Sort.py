@@ -7,3 +7,9 @@ def insert_at(array, end):
         array[i + 1] = array[i]
         i -= 1
     array[i + 1] = value
+
+
+def Insertion_Sort(array):
+    # 첫 원소 하나는 이미 정렬된 구간입니다.
+    for end in range(1, len(array)):
+        insert_at(array, end)
