@@ -10,3 +10,9 @@ def sift_down(array, root, size):
             break
         array[root], array[child] = array[child], array[root]
         root = child
+
+
+def build_max_heap(array):
+    # 자식이 있는 마지막 노드부터 루트까지 힙을 만듭니다.
+    for root in range(len(array) // 2 - 1, -1, -1):
+        sift_down(array, root, len(array))
