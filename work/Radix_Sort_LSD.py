@@ -1,3 +1,10 @@
+import json
+from pathlib import Path
+
+
+DATA_FILE = Path(__file__).parent / "data" / "radix_lsd.json"
+
+
 def digit_at(value, divisor):
     """divisor=1은 일의 자리, 10은 십의 자리입니다."""
     return value // divisor % 10
@@ -33,3 +40,16 @@ def Radix_Sort_LSD(array):
     while maximum // divisor > 0:
         sort_digit(array, divisor)
         divisor *= 10
+
+
+def main():
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8-sig"))
+    dataset = data["datasets"][0]
+    array = dataset["values"][:]
+    print("Original array is:", array)
+    Radix_Sort_LSD(array)
+    print("Sorted array is:", array)
+
+
+if __name__ == "__main__":
+    main()
