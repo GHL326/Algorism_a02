@@ -1,3 +1,10 @@
+import json
+from pathlib import Path
+
+
+DATA_FILE = Path(__file__).parent / "data" / "elementary_sort.json"
+
+
 def sift_down(array, root, size):
     """[0, size) 범위에서 root를 내려 보내 최대 힙을 복구합니다."""
     while root * 2 + 1 < size:
@@ -24,3 +31,16 @@ def Heap_Sort(array):
         # 가장 큰 루트를 뒤로 보내고 남은 구간의 힙을 복구합니다.
         array[0], array[end] = array[end], array[0]
         sift_down(array, 0, end)
+
+
+def main():
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8-sig"))
+    dataset = data["datasets"][0]
+    array = dataset["values"][:]
+    print("Original array is:", array)
+    Heap_Sort(array)
+    print("Sorted array is:", array)
+
+
+if __name__ == "__main__":
+    main()
