@@ -1,3 +1,10 @@
+import json
+from pathlib import Path
+
+
+DATA_FILE = Path(__file__).parent / "data" / "radix_msd_words.json"
+
+
 BUCKET_COUNT = 27
 
 
@@ -55,3 +62,16 @@ def Radix_Sort_MSD(array):
     # 재귀 구간이 함께 사용하는 작업 배열은 한 번만 만듭니다.
     result = [None] * len(array)
     sort_range(array, 0, len(array), 0, result)
+
+
+def main():
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8-sig"))
+    dataset = data["datasets"][0]
+    array = dataset["data"]["array"][:]
+    print("Original array is:", array)
+    Radix_Sort_MSD(array)
+    print("Sorted array is:", array)
+
+
+if __name__ == "__main__":
+    main()
