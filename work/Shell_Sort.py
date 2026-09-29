@@ -1,3 +1,10 @@
+import json
+from pathlib import Path
+
+
+DATA_FILE = Path(__file__).parent / "data" / "elementary_sort.json"
+
+
 def insert_with_gap(array, end, gap):
     """gap만큼 떨어진 원소들 사이에 현재 값을 삽입합니다."""
     value = array[end]
@@ -15,3 +22,16 @@ def Shell_Sort(array):
         for end in range(gap, len(array)):
             insert_with_gap(array, end, gap)
         gap //= 2
+
+
+def main():
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8-sig"))
+    dataset = data["datasets"][0]
+    array = dataset["values"][:]
+    print("Original array is:", array)
+    Shell_Sort(array)
+    print("Sorted array is:", array)
+
+
+if __name__ == "__main__":
+    main()
